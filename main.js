@@ -1,6 +1,7 @@
 const electron = require('electron')
-const {BrowserWindow} = require('electron');
+const { BrowserWindow, ipcMain } = require('electron');
 const app = electron.app
+const runner = require('./server/runner.js');
 // Module to create native browser window.
 // const BrowserWindow = electron.BrowserWindow
 
@@ -12,8 +13,9 @@ const url = require('url')
 let mainWindow
 
 function createWindow () {
-  mainWindow = new BrowserWindow({width: 800, height: 400, frame: true})
-  // mainWindow = new BrowserWindow({width: 400, height: 100, frame: false})
+  // mainWindow = new BrowserWindow({width: 800, height: 400, frame: true})
+  // mainWindow.webContents.openDevTools()
+  mainWindow = new BrowserWindow({width: 400, height: 75, frame: false})
 
   // and load the index.html of the app.
   mainWindow.loadURL(url.format({
@@ -22,7 +24,6 @@ function createWindow () {
     slashes: true
   }))
 
-  mainWindow.webContents.openDevTools()
   mainWindow.on('closed', function () {
     // Dereference the window object, usually you would store windows
     // in an array if your app supports multi windows, this is the time
@@ -50,5 +51,4 @@ app.on('activate', function () {
   }
 })
 
-// In this file you can include the rest of your app's specific main process
-// code. You can also put them in separate files and require them here.
+ipcMain.on('run-command', runner)
