@@ -17,6 +17,7 @@ $('#commandInput').keyup(function (e) {
 
   if (e.keyCode == ESC) {
     sendMessage('close');
+    return;
   }
 
 });

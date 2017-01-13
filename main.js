@@ -1,9 +1,7 @@
 const electron = require('electron')
-const { BrowserWindow, ipcMain } = require('electron');
+const { BrowserWindow, globalShortcut, ipcMain } = require('electron');
 const app = electron.app
 const handleMessage = require('./server/handleMessage');
-// Module to create native browser window.
-// const BrowserWindow = electron.BrowserWindow
 
 const path = require('path')
 const url = require('url')
@@ -13,9 +11,9 @@ const url = require('url')
 let mainWindow
 
 function createWindow () {
-  mainWindow = new BrowserWindow({width: 800, height: 400, frame: true})
-  mainWindow.webContents.openDevTools()
-  // mainWindow = new BrowserWindow({width: 400, height: 75, frame: false})
+  // mainWindow = new BrowserWindow({width: 800, height: 400, frame: true})
+  // mainWindow.webContents.openDevTools()
+  mainWindow = new BrowserWindow({width: 400, height: 75, frame: false})
 
   // and load the index.html of the app.
   mainWindow.loadURL(url.format({
@@ -32,7 +30,12 @@ function createWindow () {
   })
 }
 
-app.on('ready', createWindow)
+app.on('ready', () => {
+  createWindow();
+  globalShortcut.register('CommandOrControl+Space', () => {
+    mainWindow.show();
+  })
+});
 
 // Quit when all windows are closed.
 app.on('window-all-closed', function () {
