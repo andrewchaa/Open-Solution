@@ -11,13 +11,13 @@ const url = require('url')
 let mainWindow
 
 function createWindow () {
-  // mainWindow = new BrowserWindow({width: 800, height: 400, frame: true})
-  // mainWindow.webContents.openDevTools()
-  mainWindow = new BrowserWindow({width: 400, height: 75, frame: false})
+  mainWindow = new BrowserWindow({width: 800, height: 400, frame: true})
+  mainWindow.webContents.openDevTools()
+  // mainWindow = new BrowserWindow({width: 400, height: 75, frame: false})
 
   // and load the index.html of the app.
   mainWindow.loadURL(url.format({
-    pathname: path.join(__dirname, 'index.html'),
+    pathname: path.join(__dirname, './client/index.html'),
     protocol: 'file:',
     slashes: true
   }))

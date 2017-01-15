@@ -1,40 +1,16 @@
-# electron-quick-start
+# Resources
 
-**Clone and run for a quick way to see Electron in action.**
+* input box styling: http://callmenick.com/post/various-css-input-text-styles
+* ipcMain: https://github.com/electron/electron/blob/master/docs/api/ipc-main.md
+* global shortcut: https://github.com/electron/electron/blob/master/docs/api/global-shortcut.md
+* keyboard definition: https://github.com/electron/electron/blob/bb6d15ee10718d3d9bb137817cf5db6a457ea2b6/docs/api/accelerator.md
+* browser-window: https://github.com/electron/electron/blob/master/docs/api/browser-window.md
+* executing a process: http://stackoverflow.com/questions/35079548/how-to-call-shell-script-or-python-script-in-from-a-atom-electron-app
+* electron json stroage: https://github.com/jviotti/electron-json-storage
+* node.js module: https://nodejs.org/api/modules.html
+* bootstrap 4: https://v4-alpha.getbootstrap.com/
 
-This is a minimal Electron application based on the [Quick Start Guide](http://electron.atom.io/docs/tutorial/quick-start) within the Electron documentation.
 
-**Use this app along with the [Electron API Demos](http://electron.atom.io/#get-started) app for API code examples to help you get started.**
+# Things to do
 
-A basic Electron application needs just these files:
-
-- `package.json` - Points to the app's main file and lists its details and dependencies.
-- `main.js` - Starts the app and creates a browser window to render HTML. This is the app's **main process**.
-- `index.html` - A web page to render. This is the app's **renderer process**.
-
-You can learn more about each of these components within the [Quick Start Guide](http://electron.atom.io/docs/tutorial/quick-start).
-
-## To Use
-
-To clone and run this repository you'll need [Git](https://git-scm.com) and [Node.js](https://nodejs.org/en/download/) (which comes with [npm](http://npmjs.com)) installed on your computer. From your command line:
-
-```bash
-# Clone this repository
-git clone https://github.com/electron/electron-quick-start
-# Go into the repository
-cd electron-quick-start
-# Install dependencies
-npm install
-# Run the app
-npm start
-```
-
-Learn more about Electron and its API in the [documentation](http://electron.atom.io/docs/).
-
-## Other Example Apps
-
-For more example apps, see the
-[list of boilerplates](http://electron.atom.io/community/#boilerplates)
-created by the awesome electron community.
-
-#### License [CC0 1.0 (Public Domain)](LICENSE.md)
+* use bootstrap
