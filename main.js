@@ -11,7 +11,7 @@ const url = require('url')
 let mainWindow
 
 function createWindow () {
-  mainWindow = new BrowserWindow({width: 800, height: 400, frame: true})
+  mainWindow = new BrowserWindow({width: 1024, height: 400, frame: true})
   mainWindow.webContents.openDevTools()
   // mainWindow = new BrowserWindow({width: 400, height: 60, frame: false})
 
