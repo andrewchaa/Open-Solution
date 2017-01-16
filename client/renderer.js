@@ -11,6 +11,12 @@ const ESC = 27
 $('#commandInput').focus().select();
 $('#commandInput').keyup(function (e) {
   if (e.keyCode == ENTER) {
+    const command = $(this).val();
+    if (command == "/config") {
+      openConfigDialog();
+      return;
+    }
+
     sendMessage('open', 'C:\\dev\\gsa.ecm.ultra\\src\\GSA.ECM.Ultra.sln');
     return;
   }

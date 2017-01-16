@@ -2,23 +2,21 @@
 <html>
   <head>
     <meta charset="UTF-8">
-    <link href="./css/bootstrap.min.css" rel="stylesheet">
+    <link href="./bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <style>
       body {
         text-align: center;
       }
-      input[type="text"] {
-        padding: 10px;
-        border: solid 5px #c9c9c9;
-        transition: border 0.3s;
-        height: 25px;
-        width: 92%;
-        font-size: 18px;
+      #container {
+        padding-top: 10px;
+        padding-bottom: 10px;
       }
     </style>
   </head>
   <body>
-    <input type="text" id="commandInput" value="GSA.ECM.Ultra.sln">
+    <div id="container" class="container">
+      <input type="text" class="form-control" id="commandInput" value="GSA.ECM.Ultra.sln">
+    </div>
   </body>
 
   <script>
