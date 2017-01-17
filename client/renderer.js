@@ -14,7 +14,7 @@ $('#commandInput').keyup(function (e) {
   if (e.keyCode == ENTER) {
     const command = $(this).val();
     if (command == "/config") {
-      $('#configDialog').modal();
+      sendMessage('config');
       return;
     }
 

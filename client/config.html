@@ -15,7 +15,6 @@
   </head>
   <body>
     <div id="container" class="container">
-      <input type="text" class="form-control" id="commandInput" value="GSA.ECM.Ultra.sln">
 
       <div id="configDialog" class="modal fade" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document">
@@ -25,22 +24,31 @@
               <h4 class="modal-title">Settings</h4>
             </div>
             <div class="modal-body">
-              <p><textarea class="form-control" rows="3"></textarea></p>
+              <textarea id="configSettings" class="form-control" rows="15">
+                {
+                  [{ "command": "open", "display": "GSA.ECM.Ultra.sln", "path": "C:\dev\gsa.ecm.ultra\src\GSA.ECM.Ultra.sln"}]
+                }
+              </textarea>
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-primary">Save changes</button>
+              <button type="button" id="saveChanges" class="btn btn-primary">Save changes</button>
             </div>
           </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
       </div><!-- /.modal -->
-    </div>
+
+    </div><!-- /.modal -->
   </body>
 
   <script>
-    // You can also require other files to run in this process
-    require('./renderer.js')
+    window.$ = window.jQuery = require('./jquery-3.1.1.min.js')
+    require('./bootstrap/js/bootstrap.min.js');
+    const sendMessage = require('./sendMessage');
 
-
+    $('#configDialog').modal();
+    $('#saveChanges').click(function () {
+      sendMessage('save-config', $('#configSettings').text());
+    });
   </script>
 </html>
