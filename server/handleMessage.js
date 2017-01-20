@@ -16,8 +16,9 @@ module.exports = (event, params, mainWindow) => {
 
   let configWindow;
   if (params.cmd == 'config') {
-    configWindow = new BrowserWindow({width: 1200, height: 600, frame: true})
-    configWindow.webContents.openDevTools()
+    // configWindow = new BrowserWindow({width: 1200, height: 600, frame: true})
+    configWindow = new BrowserWindow({parent: mainWindow, modal: true})
+    // configWindow.webContents.openDevTools()
     // configWindow = new BrowserWindow({width: 400, height: 60, frame: false})
 
     configWindow.loadURL(url.format({

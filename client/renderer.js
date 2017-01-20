@@ -2,8 +2,9 @@
 // be executed in the renderer process for that window.
 // All of the Node.js APIs are available in this process.
 
-window.$ = window.jQuery = require('./jquery-3.1.1.min.js')
+window.$ = window.jQuery = require('jquery')
 require('./bootstrap/js/bootstrap.min.js');
+require('./bootstrap3-typeahead.min.js');
 const sendMessage = require('./sendMessage');
 
 const ENTER = 13;
@@ -28,3 +29,7 @@ $('#commandInput').keyup(function (e) {
   }
 
 });
+
+// $('#commandInput').typeahead({
+//   source: ['GSA.ECM.Ultra.sln']
+// });

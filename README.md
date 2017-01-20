@@ -9,8 +9,8 @@
 * electron json stroage: https://github.com/jviotti/electron-json-storage
 * node.js module: https://nodejs.org/api/modules.html
 * bootstrap 4: https://v4-alpha.getbootstrap.com/
-
+* bootstrap typeahead: https://github.com/bassjobsen/Bootstrap-3-Typeahead
 
 # Things to do
 
-* use bootstrap
+* ~~use bootstrap~~
