@@ -11,6 +11,11 @@
 * bootstrap 4: https://v4-alpha.getbootstrap.com/
 * bootstrap typeahead: https://github.com/bassjobsen/Bootstrap-3-Typeahead
 
+# what i have learned
+
+require jquery from npm package. Other library tries to read it from there.
+
+
 # Things to do
 
 * ~~use bootstrap~~
