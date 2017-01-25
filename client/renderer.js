@@ -1,10 +1,6 @@
-// This file is required by the index.html file and will
-// be executed in the renderer process for that window.
-// All of the Node.js APIs are available in this process.
-
 window.$ = window.jQuery = require('jquery')
 require('./bootstrap/js/bootstrap.min.js');
-require('./bootstrap3-typeahead.min.js');
+require('bootstrap-3-typeahead');
 const sendMessage = require('./sendMessage');
 
 const ENTER = 13;
@@ -15,7 +11,9 @@ $('#commandInput').keyup(function (e) {
   if (e.keyCode == ENTER) {
     const command = $(this).val();
     if (command == "/config") {
-      sendMessage('config');
+      $('#configDialog').collapse();
+
+      // sendMessage('config');
       return;
     }
 
@@ -30,6 +28,6 @@ $('#commandInput').keyup(function (e) {
 
 });
 
-// $('#commandInput').typeahead({
-//   source: ['GSA.ECM.Ultra.sln']
-// });
+$('#commandInput').typeahead({
+  source: ['GSA.ECM.Ultra.sln']
+});

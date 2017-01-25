@@ -17,6 +17,18 @@
     <div id="container" class="container">
       <input type="text" data-provide="typeahead" class="form-control"
        id="commandInput">
+
+       <div id="configDialog" class="collapse">
+         <textarea id="configSettings" class="form-control" rows="15">
+{[
+  { "name": "GSA.ECM.Ultra.sln", "command": "open", "target": "C:\dev\gsa.ecm.ultra\src\GSA.ECM.Ultra.sln"}
+]}
+         </textarea>
+         <br />
+         <button type="button" class="btn btn-default" data-toggle="collapse" data-target="#configDialog">Cancel</button>
+         <button type="button" id="saveChanges" data-toggle="collapse" data-target="#configDialog" class="btn btn-primary">Save</button>
+       </div><!-- /.modal -->
+
     </div>
   </body>
 
