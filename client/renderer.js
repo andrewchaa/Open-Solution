@@ -14,6 +14,7 @@ $('#commandInput').typeahead({
     {name: 'GSA.ECM.Hub.sln', action: 'open', target: "C:\\dev\\gsa.ecm.hub\\src\\GSA.ECM.Hub.sln"},
     {name: 'GSA.ECM.Infrastructure.sln', action: 'open', target: "C:\\dev\\gsa.ecm.infrastructure\\src\\GSA.ECM.Infrastructure.sln"},
     {name: 'GSA.ECM.Spark.sln', action: 'open', target: "C:\\dev\\gsa.ecm.spark\\src\\GSA.ECM.Spark.sln"},
+    {name: 'powershell in Infrastructure', action: 'powershell', target: "C:\\dev\\gsa.ecm.infrastructure"},
     {name: '/config', action: 'config', target: ''}
   ]
 });
@@ -28,10 +29,7 @@ $('#commandInput').keyup(function (e) {
       return;
     }
 
-    if (command.action == 'open') {
-      sendMessage(command);
-      return;
-    }
+    sendMessage(command);
   }
 
   if (e.keyCode == ESC) {
