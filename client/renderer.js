@@ -10,27 +10,33 @@ $('#commandInput').focus().select();
 $('#commandInput').typeahead({
   source: [
     {name: 'GSA.ECM.Ultra.sln', action: 'open', target: 'C:\\dev\\gsa.ecm.ultra\\src\\GSA.ECM.Ultra.sln'},
-    {name: 'GSA.ECM.InvestorRelations.sln', action: 'open', target: 'C:\\dev\\gsa.ecm.investorrelations\src\GSA.ECM.InvestorRelations.sln'}
+    {name: 'GSA.ECM.InvestorRelations.sln', action: 'open', target: 'C:\\dev\\gsa.ecm.investorrelations\\src\\GSA.ECM.InvestorRelations.sln'},
+    {name: 'GSA.ECM.Hub.sln', action: 'open', target: "C:\\dev\\gsa.ecm.hub\\src\\GSA.ECM.Hub.sln"},
+    {name: 'GSA.ECM.Infrastructure.sln', action: 'open', target: "C:\\dev\\gsa.ecm.infrastructure\\src\\GSA.ECM.Infrastructure.sln"},
+    {name: 'GSA.ECM.Spark.sln', action: 'open', target: "C:\\dev\\gsa.ecm.spark\\src\\GSA.ECM.Spark.sln"},
+    {name: '/config', action: 'config', target: ''}
   ]
 });
 
 $('#commandInput').keyup(function (e) {
   if (e.keyCode == ENTER) {
-    const command = $(this).val();
-    if (command == "/config") {
-      $('#configDialog').collapse();
+    const command = $(this).typeahead('getActive');
+    console.log(command);
 
-      // sendMessage('config');
+    if (command.action == "config") {
+      $('#configDialog').collapse();
       return;
     }
 
-    console.log($(this).val());
-    // sendMessage('open', 'C:\\dev\\gsa.ecm.ultra\\src\\GSA.ECM.Ultra.sln');
-    return;
+    if (command.action == 'open') {
+      sendMessage(command);
+      return;
+    }
   }
 
   if (e.keyCode == ESC) {
-    sendMessage('close');
+    console.log('closing');
+    sendMessage({ action: 'close' });
     return;
   }
 

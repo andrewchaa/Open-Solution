@@ -1,10 +1,6 @@
 const {ipcRenderer} = require('electron');
 
-module.exports = (cmd, app) => {
-  var rtnMessage = ipcRenderer.sendSync(
-    'run-command',
-    { cmd: cmd, app: app || '' }
-  );
-
+module.exports = (command) => {
+  var rtnMessage = ipcRenderer.sendSync('run-command', command);
   console.log(rtnMessage);
 }

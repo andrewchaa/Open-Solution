@@ -4,47 +4,23 @@ const path = require('path');
 const url = require('url');
 const storage = require('electron-json-storage');
 
-module.exports = (event, params, mainWindow) => {
-  console.log(params.cmd + 'ing: ' + params.app);
+module.exports = (event, command, mainWindow) => {
+  if (command.action == 'open') {
+    console.log('opening ' + command.name);
+    exec(command.target, function (error, stdout, stderr) {
+      if (error) console.log(error);
 
-  if (params.cmd == 'open') {
-    exec(params.app, function (error, stdout, stderr) {
-      if (error)
-        console.log(error);
+      mainWindow.hide();
     });
   }
 
-  let configWindow;
-  if (params.cmd == 'config') {
-    // configWindow = new BrowserWindow({width: 1200, height: 600, frame: true})
-    configWindow = new BrowserWindow({parent: mainWindow, modal: true})
-    // configWindow.webContents.openDevTools()
-    // configWindow = new BrowserWindow({width: 400, height: 60, frame: false})
-
-    configWindow.loadURL(url.format({
-      pathname: path.join(__dirname, '../client/config.html'),
-      protocol: 'file:',
-      slashes: true
-    }))
-
-    configWindow.on('closed', function () {
-      // Dereference the window object, usually you would store windows
-      // in an array if your app supports multi windows, this is the time
-      // when you should delete the corresponding element.
-      configWindow = null
-    })
-
+  if (command.action == 'save-config') {
+    storage.set('config', command.target);
   }
 
-  if (params.cmd == 'save-config') {
-    storage.set('config', params.app);
-  }
-
-  if (params.cmd == 'close') {
+  if (command.action == 'close') {
     mainWindow.hide();
   }
 
-
-
-  event.returnValue = params.cmd + 'ed ' + params.app ;
+  event.returnValue = command.action + 'ed ' + command.target ;
 }
