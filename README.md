@@ -10,6 +10,7 @@
 * node.js module: https://nodejs.org/api/modules.html
 * bootstrap 4: https://v4-alpha.getbootstrap.com/
 * bootstrap typeahead: https://github.com/bassjobsen/Bootstrap-3-Typeahead
+* open command line with child_process: http://stackoverflow.com/questions/31737743/how-to-open-a-command-line-window-in-node-js
 
 # what i have learned
 

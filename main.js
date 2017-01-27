@@ -11,9 +11,16 @@ const url = require('url')
 let mainWindow
 
 function createWindow () {
-  // mainWindow = new BrowserWindow({width: 1024, height: 600, frame: true})
+  // mainWindow = new BrowserWindow({transparent: true, width: 1024, height: 600, frame: true})
   // mainWindow.webContents.openDevTools()
-  mainWindow = new BrowserWindow({width: 600, height: 400, frame: false})
+  // mainWindow = new BrowserWindow({transparent: true, width: 600, height: 400, frame: false})
+  mainWindow = new BrowserWindow({
+    transparent: true,
+    alwaysOnTop: true,
+    useContentSize: true,
+    frame: false
+  });
+  mainWindow.setSize(600, 400);
 
   mainWindow.loadURL(url.format({
     pathname: path.join(__dirname, './client/index.html'),

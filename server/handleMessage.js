@@ -16,8 +16,9 @@ module.exports = (event, command, mainWindow) => {
   }
 
   if (command.action == 'powershell') {
-    console.log('test...')
-    exec('C:\\Users\\achaa\\Documents\\open-solution\\server\\start.bat');
+    console.log('opening powershell prompt in ' + command.target);
+    exec('start powershell -NoExit -Command cd ' + command.target);
+    mainWindow.hide();
   }
 
   if (command.action == 'save-config') {
