@@ -21,6 +21,12 @@ module.exports = (event, command, mainWindow) => {
     mainWindow.hide();
   }
 
+  if (command.action == 'explorer') {
+    console.log('opening windows explorer in ' + command.target);
+    exec('explorer ' + command.target);
+    mainWindow.hide();
+  }
+
   if (command.action == 'save-config') {
     storage.set('config', command.target);
   }
