@@ -11,6 +11,7 @@
 * bootstrap 4: https://v4-alpha.getbootstrap.com/
 * bootstrap typeahead: https://github.com/bassjobsen/Bootstrap-3-Typeahead
 * open command line with child_process: http://stackoverflow.com/questions/31737743/how-to-open-a-command-line-window-in-node-js
+* tray: electron.Tray
 
 # what i have learned
 
