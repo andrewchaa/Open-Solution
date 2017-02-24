@@ -1,21 +1,18 @@
 {
-  "name": "electron-quick-start",
+  "name": "Sesame",
   "version": "1.0.0",
   "description": "A minimal Electron application",
   "main": "main.js",
   "scripts": {
     "debug": "electron --debug=5858 .",
-    "start": "electron ."
+    "start": "electron . "
   },
-  "repository": "https://github.com/electron/electron-quick-start",
+  "repository": "https://github.com/andrewchaa/Open-Solution",
   "keywords": [
-    "Electron",
-    "quick",
-    "start",
-    "tutorial",
-    "demo"
+    "Launcher",
+    "quick"
   ],
-  "author": "GitHub",
+  "author": "Andrew Chaa",
   "license": "CC0-1.0",
   "devDependencies": {
     "electron": "^1.4.1"

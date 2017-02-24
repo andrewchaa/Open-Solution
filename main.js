@@ -1,5 +1,5 @@
 const electron = require('electron')
-const { BrowserWindow, globalShortcut, ipcMain } = require('electron');
+const { BrowserWindow, globalShortcut, ipcMain, webContents } = require('electron');
 const app = electron.app
 const handleMessage = require('./server/handleMessage');
 
@@ -15,12 +15,13 @@ function createWindow () {
   // mainWindow.webContents.openDevTools()
   // mainWindow = new BrowserWindow({transparent: true, width: 600, height: 400, frame: false})
   mainWindow = new BrowserWindow({
+    width: 600,
+    height: 400,
     transparent: true,
     alwaysOnTop: true,
-    useContentSize: true,
-    frame: false
+    frame: false,
   });
-  mainWindow.setSize(600, 400);
+  // mainWindow.setSize(600, 400);
 
   mainWindow.loadURL(url.format({
     pathname: path.join(__dirname, './client/index.html'),
@@ -28,36 +29,24 @@ function createWindow () {
     slashes: true
   }))
 
-  mainWindow.on('closed', function () {
-    // Dereference the window object, usually you would store windows
-    // in an array if your app supports multi windows, this is the time
-    // when you should delete the corresponding element.
-    mainWindow = null
-  })
+  mainWindow.on('closed', function () { mainWindow = null })
 }
 
 app.on('ready', () => {
   createWindow();
   globalShortcut.register('CommandOrControl+Space', () => {
     mainWindow.show();
+    mainWindow.webContents.send('show-window', 'hello');
   })
 });
 
 // Quit when all windows are closed.
 app.on('window-all-closed', function () {
-  // On OS X it is common for applications and their menu bar
-  // to stay active until the user quits explicitly with Cmd + Q
-  if (process.platform !== 'darwin') {
-    app.quit()
-  }
+  if (process.platform !== 'darwin') { app.quit() }
 })
 
 app.on('activate', function () {
-  // On OS X it's common to re-create a window in the app when the
-  // dock icon is clicked and there are no other windows open.
-  if (mainWindow === null) {
-    createWindow()
-  }
+  if (mainWindow === null) { createWindow() }
 })
 
 ipcMain.on('run-command', function (event, command) {

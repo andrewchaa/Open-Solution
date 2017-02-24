@@ -1,7 +1,9 @@
 window.$ = window.jQuery = require('jquery')
 require('bootstrap');
 require('bootstrap-3-typeahead');
+
 const sendMessage = require('./sendMessage');
+const { ipcRenderer } = require('electron')
 
 const ENTER = 13;
 const ESC = 27
@@ -43,5 +45,8 @@ $('#commandInput').keyup(function (e) {
     sendMessage({ action: 'close' });
     return;
   }
+});
 
+ipcRenderer.on('show-window', (event, message) => {
+  $('#commandInput').focus().select();
 });
