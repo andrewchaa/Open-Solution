@@ -15,9 +15,8 @@ function createWindow () {
   // mainWindow.webContents.openDevTools()
   // mainWindow = new BrowserWindow({transparent: true, width: 600, height: 400, frame: false})
   mainWindow = new BrowserWindow({
-    width: 600,
-    height: 400,
-    transparent: true,
+    width: 700,
+    height: 55,
     alwaysOnTop: true,
     frame: false,
   });
