@@ -8,19 +8,37 @@ const url = require('url')
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
-let mainWindow
+let mainWindow;
+let popUpWindow;
 
 function createWindow () {
   // mainWindow = new BrowserWindow({transparent: true, width: 1024, height: 600, frame: true})
-  // mainWindow.webContents.openDevTools()
   // mainWindow = new BrowserWindow({transparent: true, width: 600, height: 400, frame: false})
   mainWindow = new BrowserWindow({
     width: 700,
     height: 55,
-    alwaysOnTop: true,
+    // alwaysOnTop: true,
+    alwaysOnTop: false,
     frame: false,
   });
-  // mainWindow.setSize(600, 400);
+  // mainWindow.setSize(1000, 600);
+  // mainWindow.webContents.openDevTools()
+
+  const position = mainWindow.getPosition();
+
+  popUpWindow = new BrowserWindow({
+    x:position[0],
+    y:position[1] + 60,
+    width: 700,
+    height: 300,
+    // alwaysOnTop: true,
+    alwaysOnTop: false,
+    frame: false,
+  });
+
+  console.log(mainWindow);
+
+  console.log(mainWindow.getPosition());
 
   mainWindow.loadURL(url.format({
     pathname: path.join(__dirname, './client/index.html'),
