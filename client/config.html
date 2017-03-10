@@ -44,11 +44,10 @@
   <script>
     window.$ = window.jQuery = require('./jquery-3.1.1.min.js')
     require('./bootstrap/js/bootstrap.min.js');
-    const sendMessage = require('./sendMessage');
 
     $('#configDialog').modal();
     $('#saveChanges').click(function () {
-      sendMessage('save-config', $('#configSettings').text());
+
     });
   </script>
 </html>

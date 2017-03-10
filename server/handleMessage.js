@@ -4,7 +4,7 @@ const path = require('path');
 const url = require('url');
 const storage = require('electron-json-storage');
 
-module.exports = (event, command, mainWindow) => {
+module.exports = (event, command, mainWindow, popUpWindow) => {
   console.log(command);
 
   if (command.action == 'open') {

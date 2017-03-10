@@ -2,7 +2,7 @@
   "name": "Sesame",
   "version": "1.0.0",
   "description": "A minimal Electron application",
-  "main": "main.js",
+  "main": "serverMain.js",
   "scripts": {
     "debug": "electron --debug=5858 .",
     "start": "electron . ",

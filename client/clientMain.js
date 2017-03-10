@@ -2,9 +2,7 @@ window.$ = window.jQuery = require('jquery')
 require('bootstrap');
 require('bootstrap-3-typeahead');
 
-const sendMessage = require('./sendMessage');
 const { ipcRenderer } = require('electron')
-
 const ENTER = 13;
 const ESC = 27
 
@@ -37,23 +35,35 @@ $('#commandInput').typeahead({
 $('#commandInput').keyup(function (e) {
   if (e.keyCode == ENTER) {
     const command = $(this).typeahead('getActive');
-    console.log(command);
 
     if (command.action == "config") {
       $('#configDialog').collapse();
       return;
     }
 
-    sendMessage(command);
+    ipcRenderer.sendSync('run-command', command);
   }
 
   if (e.keyCode == ESC) {
     console.log('closing');
-    sendMessage({ action: 'close' });
+    ipcRenderer.sendSync('run-command', { action: 'close' });
     return;
   }
+
+  console.log('clientMain: display-list ' + $(this).val());
+  ipcRenderer.send('server', { action: 'display-list' } );
 });
 
-ipcRenderer.on('show-window', (event, message) => {
-  $('#commandInput').focus().select();
-});
+// ipcRenderer.on('client', (event, message) => {
+//   console.log('clientMain: ipcRenderer - ' + JSON.stringify(message));
+//   if (message.action == 'focus-main') {
+//     console.log('focusing #commandInput...');
+//     $('#commandInput').focus();
+//   }
+// });
+
+// ipcRenderer.on('main-client', (event, message) => {
+//   if (message == 'focus-main') {
+//     $('#commandInput').focus();
+//   }
+// });
