@@ -28,11 +28,11 @@ function createWindow () {
 
 app.on('ready', () => {
   createWindow();
-  
+
   globalShortcut.register('CommandOrControl+Space', () => {
     console.log('showing the window...')
     mainWindow.show();
-    mainWindow.webContents.send('client', 'focus-main');
+    mainWindow.webContents.send('client', { action: 'focus-main'});
   })
 });
 
@@ -45,26 +45,13 @@ app.on('activate', function () {
   if (mainWindow === null) { createWindow() }
 })
 
+ipcMain.on('window-size', function (event, message) {
+  console.log('window-size: ' + JSON.stringify(message));
+  mainWindow.setSize(message.width, message.height);
+});
+
 ipcMain.on('server', function (event, message) {
   console.log('main: ipcMain - ' + JSON.stringify(message));
-
-  if (message.action == 'open-list') {
-    console.log('opening list');
-    mainWindow.setSize(700, 500);
-    return;
-  }
-
-  if (message.action == 'hide-list') {
-    console.log('opening list');
-    mainWindow.setSize(700, 55);
-    return;
-  }
-
-  // if (message.action == 'focus-main') {
-  //   mainWindow.show();
-  //   mainWindow.webContents.send('client', message);
-  //   return;
-  // }
 
   if (message.action == 'open') {
     console.log('opening ' + message.name);
