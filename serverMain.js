@@ -5,8 +5,6 @@ const { exec, spawn } = require('child_process');
 const path = require('path')
 const url = require('url')
 
-// Keep a global reference of the window object, if you don't, the window will
-// be closed automatically when the JavaScript object is garbage collected.
 let mainWindow;
 
 function createWindow () {
@@ -14,7 +12,6 @@ function createWindow () {
     width: 700,
     height: 55,
     alwaysOnTop: true,
-    alwaysOnTop: false,
     frame: false,
   });
   // mainWindow.setSize(1000, 600);
@@ -31,9 +28,11 @@ function createWindow () {
 
 app.on('ready', () => {
   createWindow();
+  
   globalShortcut.register('CommandOrControl+Space', () => {
+    console.log('showing the window...')
     mainWindow.show();
-    mainWindow.webContents.send('show-window', 'hello');
+    mainWindow.webContents.send('client', 'focus-main');
   })
 });
 
@@ -61,16 +60,17 @@ ipcMain.on('server', function (event, message) {
     return;
   }
 
-  if (message.action == 'focus-main') {
-    mainWindow.show();
-    mainWindow.webContents.send('client', message);
-    return;
-  }
+  // if (message.action == 'focus-main') {
+  //   mainWindow.show();
+  //   mainWindow.webContents.send('client', message);
+  //   return;
+  // }
 
   if (message.action == 'open') {
     console.log('opening ' + message.name);
     exec(message.target, function (error, stdout, stderr) {
       if (error) console.log(error);
+      mainWindow.setSize(700, 55);
       mainWindow.hide();
     });
   }
@@ -78,12 +78,20 @@ ipcMain.on('server', function (event, message) {
   if (message.action == 'powershell') {
     console.log('opening powershell prompt in ' + message.target);
     exec('start powershell -NoExit -Command cd ' + message.target);
+    mainWindow.setSize(700, 55);
     mainWindow.hide();
   }
 
   if (message.action == 'explorer') {
     console.log('opening windows explorer in ' + message.target);
     exec('explorer ' + message.target);
+    mainWindow.setSize(700, 55);
+    mainWindow.hide();
+  }
+
+  if (message.action == 'hide-window') {
+    console.log('hiding window ...')
+    mainWindow.setSize(700, 55);
     mainWindow.hide();
   }
 

@@ -46,26 +46,29 @@ $('#commandInput').keyup(function (e) {
   if (e.keyCode == ESC) {
     console.log('closing');
 
-    ipcRenderer.sendSync('run-command', { action: 'close' });
+    ipcRenderer.sendSync('server', { action: 'hide-window' });
     return;
   }
 
   console.log('clientMain: display-list ' + $(this).val());
   if ($(this).val().length > 0) {
     ipcRenderer.send('server', { action: 'open-list' } );
+    return;
   } else {
     ipcRenderer.send('server', { action: 'hide-list' } );
+    return;
   }
 
 });
 
-// ipcRenderer.on('client', (event, message) => {
-//   console.log('clientMain: ipcRenderer - ' + JSON.stringify(message));
-//   if (message.action == 'focus-main') {
-//     console.log('focusing #commandInput...');
-//     $('#commandInput').focus();
-//   }
-// });
+ipcRenderer.on('client', (event, message) => {
+  console.log('clientMain: ipcRenderer - ' + JSON.stringify(message));
+
+  if (message.action == 'focus-main') {
+    console.log('focusing #commandInput...');
+    $('#commandInput').focus();
+  }
+});
 
 // ipcRenderer.on('main-client', (event, message) => {
 //   if (message == 'focus-main') {
