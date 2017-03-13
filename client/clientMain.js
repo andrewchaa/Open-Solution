@@ -33,25 +33,30 @@ $('#commandInput').typeahead({
 });
 
 $('#commandInput').keyup(function (e) {
+  console.log('clientMain: keyCode ' + e.keyCode);
+
   if (e.keyCode == ENTER) {
-    const command = $(this).typeahead('getActive');
+    const message = $(this).typeahead('getActive');
+    $(this).val(message.name);
 
-    if (command.action == "config") {
-      $('#configDialog').collapse();
-      return;
-    }
-
-    ipcRenderer.sendSync('run-command', command);
+    ipcRenderer.sendSync('server', message);
+    return;
   }
 
   if (e.keyCode == ESC) {
     console.log('closing');
+
     ipcRenderer.sendSync('run-command', { action: 'close' });
     return;
   }
 
   console.log('clientMain: display-list ' + $(this).val());
-  ipcRenderer.send('server', { action: 'display-list' } );
+  if ($(this).val().length > 0) {
+    ipcRenderer.send('server', { action: 'open-list' } );
+  } else {
+    ipcRenderer.send('server', { action: 'hide-list' } );
+  }
+
 });
 
 // ipcRenderer.on('client', (event, message) => {

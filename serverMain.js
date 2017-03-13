@@ -1,20 +1,15 @@
 const electron = require('electron')
 const { BrowserWindow, globalShortcut, ipcMain, webContents } = require('electron');
 const app = electron.app
-const handleMessage = require('./server/handleMessage');
-const popUp = require('./server/popUp');
-
+const { exec, spawn } = require('child_process');
 const path = require('path')
 const url = require('url')
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow;
-let popUpWindow;
 
 function createWindow () {
-  // mainWindow = new BrowserWindow({transparent: true, width: 1024, height: 600, frame: true})
-  // mainWindow = new BrowserWindow({transparent: true, width: 600, height: 400, frame: false})
   mainWindow = new BrowserWindow({
     width: 700,
     height: 55,
@@ -24,10 +19,6 @@ function createWindow () {
   });
   // mainWindow.setSize(1000, 600);
   // mainWindow.webContents.openDevTools()
-
-  popUpWindow = popUp(mainWindow.getPosition());
-
-  console.log(mainWindow.getPosition());
 
   mainWindow.loadURL(url.format({
     pathname: path.join(__dirname, './client/client-main.html'),
@@ -58,30 +49,42 @@ app.on('activate', function () {
 ipcMain.on('server', function (event, message) {
   console.log('main: ipcMain - ' + JSON.stringify(message));
 
-  if (message.action == 'display-list') {
-    console.log('displaying list');
-    mainWindow.setSize(700, 600);
+  if (message.action == 'open-list') {
+    console.log('opening list');
+    mainWindow.setSize(700, 500);
+    return;
   }
 
-  if (message.action == 'key up') {
-    popUpWindow.show();
-    popUpWindow.webContents.send('client', message);
+  if (message.action == 'hide-list') {
+    console.log('opening list');
+    mainWindow.setSize(700, 55);
+    return;
   }
 
   if (message.action == 'focus-main') {
     mainWindow.show();
     mainWindow.webContents.send('client', message);
+    return;
   }
-  // event.sender.send('client', message);
-});
 
-// ipcMain.on('run-command', function (event, command) {
-//   return handleMessage(event, command, mainWindow, popUpWindow);
-// });
-//
-// ipcMain.on('client-messages', function (event, message) {
-//   console.log('client-messages: ' + message);
-//   if (message == 'focus-main') {
-//     mainWindow.webContents.send('main-client', message);
-//   }
-// })
+  if (message.action == 'open') {
+    console.log('opening ' + message.name);
+    exec(message.target, function (error, stdout, stderr) {
+      if (error) console.log(error);
+      mainWindow.hide();
+    });
+  }
+
+  if (message.action == 'powershell') {
+    console.log('opening powershell prompt in ' + message.target);
+    exec('start powershell -NoExit -Command cd ' + message.target);
+    mainWindow.hide();
+  }
+
+  if (message.action == 'explorer') {
+    console.log('opening windows explorer in ' + message.target);
+    exec('explorer ' + message.target);
+    mainWindow.hide();
+  }
+
+});
