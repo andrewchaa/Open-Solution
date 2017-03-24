@@ -12,10 +12,13 @@
 * bootstrap typeahead: https://github.com/bassjobsen/Bootstrap-3-Typeahead
 * open command line with child_process: http://stackoverflow.com/questions/31737743/how-to-open-a-command-line-window-in-node-js
 * tray: electron.Tray
+* file search: https://github.com/substack/node-findit
 
 # what i have learned
 
-require jquery from npm package. Other library tries to read it from there.
+* require jquery from npm package. Other library tries to read it from there.
+* path.extname
+
 
 
 # Things to do

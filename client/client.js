@@ -18,7 +18,8 @@ $('#commandInput').typeahead({
     {name: 'Open GSA.ECM.Cqrs.sln', action: 'open', target: "C:\\dev\\gsa.ecm.Cqrs\\src\\GSA.ECM.Cqrs.sln"},
     {name: 'Open GSA.ECM.Security.sln', action: 'open', target: "C:\\dev\\gsa.ecm.security\\src\\GSA.ECM.Security.sln"},
     {name: 'Open GSA.ECM.MicroserviceHost.sln', action: 'open', target: "C:\\dev\\GSA.ECM.MicroserviceHost\\src\\GSA.ECM.MicroserviceHost.sln"},
-    {name: 'Open GSA.ECM.Utils.sln', action: 'open', target: "C:\\dev\\GSA.ECM.MicroserviceHost\\src\\GSA.ECM.Utils.sln"},
+    {name: 'Open GSA.ECM.Utils.sln', action: 'open', target: "C:\\dev\\GSA.ECM.Utils\\src\\GSA.ECM.Utils.sln"},
+    {name: 'Open GSA.ECM.EmailService.sln', action: 'open', target: "C:\\dev\\GSA.ECM.EmailService\\src\\GSA.ECM.EmailService.sln"},
     {name: 'Open Powershell in GSA.ECM.Ultra', action: 'powershell', target: "C:\\dev\\GSA.ECM.Ultra"},
     {name: 'Open Powershell in GSA.ECM.InvestorRelations', action: 'powershell', target: "C:\\dev\\GSA.ECM.InvestorRelations"},
     {name: 'Open Powershell in GSA.ECM.Hub', action: 'powershell', target: "C:\\dev\\GSA.ECM.Hub"},
@@ -29,6 +30,7 @@ $('#commandInput').typeahead({
     {name: 'Open Powershell in GSA.ECM.Security', action: 'powershell', target: "C:\\dev\\gsa.ecm.security"},
     {name: 'Open Powershell in GSA.ECM.MicroserviceHost', action: 'powershell', target: "C:\\dev\\GSA.ECM.MicroserviceHost"},
     {name: 'Open Powershell in GSA.ECM.Utils', action: 'powershell', target: "C:\\dev\\GSA.ECM.Utils"},
+    {name: 'Open Powershell in GSA.ECM.EmailService', action: 'powershell', target: "C:\\dev\\GSA.ECM.EmailService"},
     {name: 'Open Explorer in GSA.ECM.Ultra', action: 'explorer', target: "C:\\dev\\GSA.ECM.Ultra"},
     {name: 'Open Explorer in GSA.ECM.InvestorRelations', action: 'explorer', target: "C:\\dev\\GSA.ECM.InvestorRelations"},
     {name: 'Open Explorer in GSA.ECM.Hub', action: 'explorer', target: "C:\\dev\\GSA.ECM.Hub"},
@@ -39,6 +41,7 @@ $('#commandInput').typeahead({
     {name: 'Open Explorer in GSA.ECM.Security', action: 'explorer', target: "C:\\dev\\GSA.ECM.Security"},
     {name: 'Open Explorer in GSA.ECM.MicroserviceHost', action: 'explorer', target: "C:\\dev\\GSA.ECM.MicroserviceHost"},
     {name: 'Open Explorer in GSA.ECM.Utils', action: 'explorer', target: "C:\\dev\\GSA.ECM.Utils"},
+    {name: 'Open Explorer in GSA.ECM.EmailService', action: 'explorer', target: "C:\\dev\\GSA.ECM.EmailService"},
     {name: 'Open Explorer in TeamCity package source', action: 'explorer', target: "\\\\intra.gsacapital.com\\live\\deploy\\ecm\\public\\libs"}
 
   ]
@@ -64,11 +67,13 @@ $('#commandInput').keyup(function (e) {
 
   console.log('client: display-list ' + $(this).val());
   if ($(this).val().length > 0) {
-    var height = $('.typeahead').height() + 70;
-    console.log('window height: ' + height);
+    var height = $('.typeahead').height() + 60;
+    if (height < 60)
+      height = 60;
+
     ipcRenderer.send('window-size', { width: 700, height: height });
   } else {
-    ipcRenderer.send('window-size', { width: 700, height: 55 });
+    ipcRenderer.send('window-size', { width: 700, height: 60 });
   }
 });
 
