@@ -18,7 +18,7 @@ function createWindow () {
   // mainWindow.webContents.openDevTools()
 
   mainWindow.loadURL(url.format({
-    pathname: path.join(__dirname, './client/client-main.html'),
+    pathname: path.join(__dirname, './client/client.html'),
     protocol: 'file:',
     slashes: true
   }))
@@ -32,7 +32,7 @@ app.on('ready', () => {
   globalShortcut.register('CommandOrControl+Space', () => {
     console.log('showing the window...')
     mainWindow.show();
-    mainWindow.webContents.send('client', { action: 'focus-main'});
+    mainWindow.webContents.send('focus-main');
   })
 });
 

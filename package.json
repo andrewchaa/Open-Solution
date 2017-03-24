@@ -2,7 +2,7 @@
   "name": "Sesame",
   "version": "1.0.0",
   "description": "A minimal Electron application",
-  "main": "serverMain.js",
+  "main": "server.js",
   "scripts": {
     "debug": "electron --debug=5858 .",
     "start": "electron . ",
@@ -15,9 +15,6 @@
   ],
   "author": "Andrew Chaa",
   "license": "CC0-1.0",
-  "devDependencies": {
-    "electron": "^1.4.1"
-  },
   "dependencies": {
     "bootstrap": "^3.3.7",
     "bootstrap-3-typeahead": "^4.0.2",
